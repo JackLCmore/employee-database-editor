@@ -19,13 +19,6 @@ const db = mysql.createConnection({
 console.log(`Connected to the books_db database.`)
 );
 
-    inquirer
-    .prompt(menuQuestion)
-    .then((res)=>{
-        console.log(res.menu)
-    determineChoice(res.menu)
-    });
-
 function openMenu(){
     inquirer
     .prompt(menuQuestion)
@@ -51,7 +44,9 @@ else if(choice === 'Update Employee Role'){
     return openMenu();
 }
 else if(choice === 'View All Roles'){
-    console.log(choice);
+    db.query('SELECT * FROM roles', function (err, res){
+        console.table(res);
+    })
     return openMenu();
 }
 else if(choice === 'Add Role'){
@@ -59,7 +54,9 @@ else if(choice === 'Add Role'){
     return openMenu();
 }
 else if(choice === 'View All Departments'){
-    console.log(choice);
+    db.query('SELECT * FROM departments', function (err, res){
+        console.table(res);
+    })
     return openMenu();
 }
 else if(choice === 'Add Department'){
@@ -71,3 +68,5 @@ else if(choice === 'Close'){
     return;
 }
 };
+
+openMenu();
