@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-// const mysql = require('mysql2');
+const mysql = require('mysql2');
 
 const menuQuestion = [
     {
@@ -10,14 +10,14 @@ const menuQuestion = [
     }
 ]
 
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'password',
-//     database: 'employee_db'
-//   },
-// console.log(`Connected to the books_db database.`)
-// );
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'employees_db'
+  },
+console.log(`Connected to the books_db database.`)
+);
 
     inquirer
     .prompt(menuQuestion)
@@ -36,9 +36,9 @@ function openMenu(){
 
 function determineChoice(choice){
 if (choice === 'View All Employees'){
-// db.query('SELECT * FROM employees', function (err, res){
-//     console.table(res);
-// })
+db.query('SELECT * FROM employees', function (err, res){
+    console.table(res);
+})
 console.log(choice);
 return openMenu();
 }
