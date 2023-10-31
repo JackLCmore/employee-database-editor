@@ -30,6 +30,7 @@ function openMenu(){
 function determineChoice(choice){
 if (choice === 'View All Employees'){
 db.query('SELECT * FROM employees', function (err, res){
+    console.log("\n")
     console.table(res);
 })
 console.log(choice);
@@ -45,6 +46,7 @@ else if(choice === 'Update Employee Role'){
 }
 else if(choice === 'View All Roles'){
     db.query('SELECT * FROM roles', function (err, res){
+        console.log("\n")
         console.table(res);
     })
     return openMenu();
@@ -55,6 +57,7 @@ else if(choice === 'Add Role'){
 }
 else if(choice === 'View All Departments'){
     db.query('SELECT * FROM departments', function (err, res){
+        console.log("\n")
         console.table(res);
     })
     return openMenu();
