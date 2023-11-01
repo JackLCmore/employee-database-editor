@@ -10,6 +10,52 @@ const menuQuestion = [
     }
 ]
 
+const employeeQuestions = [
+    {
+        name:'first_name',
+        type:'input',
+        message:'What is the first name of the new employee?'
+    },
+    {
+        name:'last_name',
+        type:'input',
+        message:'What is the last name of the new employee?'
+    },
+    {
+        name:'role',
+        type:'list',
+        message:'Which role is the new employee?',
+        choices:["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"]
+    },
+    {
+        name:'manager',
+        type:'list',
+        message:'Which manager is the new employee working under?',
+        choices: ["Jane Doe", "Rick Astley", "Billie Eilish", "Jordan Peele", "Jack Lunchick-Seymour", "John Doe", "Janice Joplin", "George Takei"]
+    },
+];
+
+const roleQuestions = [
+    {
+        name:'name',
+        type:'input',
+        message:'What is the name of the role?'
+    },
+    {
+        name:'salary',
+        type:'input',
+        message:'What is the salary of the role?'
+    },
+    {
+        name:'dept',
+        type:'list',
+        message:'Which department does the role belong to?',
+        choices: ['Sales', 'Engineering', 'Finance', 'Legal']
+    }
+]
+
+const deptQuestions = [];
+
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -27,6 +73,157 @@ function openMenu(){
     });
 }
 
+function addEmployee(){
+
+    //query db for all department
+    // db.query()
+    //with the return query/array > modify array for dept choices question
+    // var oldObj = {
+    //     name: setDefaultAutoSelectFamily,
+    //     salary: xxxxxx,
+    //     dept: 
+    // } 
+
+    // var newObj = {
+    //     title: oldObj.name,
+    //     salary: oldObj.salary,
+    //     department_id: oldObj.dept
+    // }
+
+    inquirer
+    .prompt(employeeQuestions)
+    .then((res)=>{
+
+    if(res.dept === "Sales"){
+    db.query('',function (err, res){
+        console.log("\n")
+        console.table(res);
+        return openMenu();
+    })}
+    else if(res.dept === "Engineering"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }
+    else if(res.dept === "Finance"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }
+    else if(res.dept === "Legal"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }})
+   
+};function addRole(){
+
+    //query db for all department
+    // db.query()
+    //with the return query/array > modify array for dept choices question
+    // var oldObj = {
+    //     name: setDefaultAutoSelectFamily,
+    //     salary: xxxxxx,
+    //     dept: 
+    // } 
+
+    // var newObj = {
+    //     title: oldObj.name,
+    //     salary: oldObj.salary,
+    //     department_id: oldObj.dept
+    // }
+
+    inquirer
+    .prompt(roleQuestions)
+    .then((res)=>{
+
+    if(res.dept === "Sales"){
+    db.query('',function (err, res){
+        console.log("\n")
+        console.table(res);
+        return openMenu();
+    })}
+    else if(res.dept === "Engineering"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }
+    else if(res.dept === "Finance"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }
+    else if(res.dept === "Legal"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }})
+   
+};
+function addDept(){
+
+    //query db for all department
+    // db.query()
+    //with the return query/array > modify array for dept choices question
+    // var oldObj = {
+    //     name: setDefaultAutoSelectFamily,
+    //     salary: xxxxxx,
+    //     dept: 
+    // } 
+
+    // var newObj = {
+    //     title: oldObj.name,
+    //     salary: oldObj.salary,
+    //     department_id: oldObj.dept
+    // }
+
+    inquirer
+    .prompt(deptQuestions)
+    .then((res)=>{
+
+    if(res.dept === "Sales"){
+    db.query('',function (err, res){
+        console.log("\n")
+        console.table(res);
+        return openMenu();
+    })}
+    else if(res.dept === "Engineering"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }
+    else if(res.dept === "Finance"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }
+    else if(res.dept === "Legal"){
+        db.query('',function (err, res){
+            console.log("\n")
+            console.table(res);
+            return openMenu();
+        })
+    }})
+   
+};
+
+
 function determineChoice(choice){
 if (choice === 'View All Employees'){
 db.query('SELECT * FROM employees', function (err, res){
@@ -38,7 +235,7 @@ return openMenu();
 }
 else if(choice === 'Add Employee'){
     console.log(choice);
-    return openMenu();
+    return addEmployee();
 }
 else if(choice === 'Update Employee Role'){
     console.log(choice);
@@ -53,7 +250,7 @@ else if(choice === 'View All Roles'){
 }
 else if(choice === 'Add Role'){
     console.log(choice);
-    return openMenu();
+    return addRole();
 }
 else if(choice === 'View All Departments'){
     db.query('SELECT * FROM departments', function (err, res){
@@ -64,7 +261,7 @@ else if(choice === 'View All Departments'){
 }
 else if(choice === 'Add Department'){
     console.log(choice);
-    return openMenu();
+    return addDept();
 }
 else if(choice === 'Close'){
     console.log(choice);
