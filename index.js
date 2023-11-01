@@ -31,7 +31,7 @@ const employeeQuestions = [
         name:'manager',
         type:'list',
         message:'Which manager is the new employee working under?',
-        choices: ["Jane Doe", "Rick Astley", "Billie Eilish", "Jordan Peele", "Jack Lunchick-Seymour", "John Doe", "Janice Joplin", "George Takei"]
+        choices: ["Jane Doe", "Rick Astley", "Billie Eilish", "Jordan Peele", "Jack Lunchick-Seymour", "John Doe", "Janice Joplin", "George Takei", "NA"]
     },
 ];
 
@@ -84,13 +84,17 @@ function addEmployee(){
     inquirer
     .prompt(employeeQuestions)
     .then((res)=>{
-        console.log(res)
+        console.log(res);
         db.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id)
-        VALUES ("${res.first_name}", "${res.last_name}", ${determineRoleID(res.role)}, ${determineManagerID(res.manager)})`,function (err,res){
-
-
-        })
-    })
+        VALUES ("${res.first_name}", "${res.last_name}", ${determineRoleID(res.role)}, ${determineManagerID(res.manager)})`,function (err,queryData){
+        console.log(queryData);
+        db.query('SELECT * FROM employees', function (err, res){
+            console.log("\n");
+            console.table(res);
+        });
+        return openMenu();
+        });
+    });
    
 };
 
@@ -139,56 +143,59 @@ function addDept(){
 };
 
 function determineRoleID (input){
-if(input === ''){
-
+if(input === 'Sales Lead'){
+return 1;
 }
-else if (input === ''){
-
+else if (input === 'Salesperson'){
+return 2;
 }
-else if (input === ''){
-    
+else if (input === 'Lead Engineer'){
+return 3;    
 }
-else if (input === ''){
-    
+else if (input === 'Software Engineer'){
+return 4;
 }
-else if (input === ''){
-    
+else if (input === 'Account Manager'){
+return 5;
 }
-else if (input === ''){
-    
+else if (input === 'Accountant'){
+return 6;
 }
-else if (input === ''){
-    
+else if (input === 'Legal Team Lead'){
+return 7;
 }
-else if (input === ''){
-    
+else if (input === 'Lawyer'){
+return 8;
 }
 };
 
 function determineManagerID (input){
-if(input === ''){
-
+if(input === 'Jane Doe'){
+return 1;
 }
-else if (input === ''){
-
+else if (input === 'Rick Astley'){
+return 2;
 }
-else if (input === ''){
-    
+else if (input === 'Billie Eilish'){
+return 3;
 }
-else if (input === ''){
-    
+else if (input === 'Jordan Peele'){
+return 4;
 }
-else if (input === ''){
-    
+else if (input === 'Jack Lunchick-Seymour'){
+return 5;
 }
-else if (input === ''){
-    
+else if (input === 'John Doe'){
+return 6;
 }
-else if (input === ''){
-    
+else if (input === 'Janice Joplin'){
+return 7;
 }
-else if (input === ''){
-    
+else if (input === 'George Takei'){
+return 8;
+}
+else{
+return 'null'
 }
 };
 
