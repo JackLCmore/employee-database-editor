@@ -27,6 +27,8 @@
     
   ## Usage
     
+  [Video Tutorial Here](https://youtu.be/wFSjWwXSiZk)
+
   To use the application, after starting you will be presented with a menu containing actions you can take using your database.
     
   ## Contributers
